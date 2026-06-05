@@ -1,0 +1,51 @@
+<nav class="wl-navbar sticky-top">
+  <div class="wl-nav-inner">
+    <!-- Logo -->
+    <a class="wl-logo" href="/">
+      <i class="fa-solid fa-compass"></i>
+      <span>wanderlust</span>
+    </a>
+
+    <!-- Search Bar (desktop) -->
+    <form class="wl-search-bar" action="/listings" method="GET">
+      <input name="q" type="text" placeholder="Search destinations..." class="wl-search-input" />
+      <button type="submit" class="wl-search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+
+    <!-- Right Menu -->
+    <div class="wl-nav-right">
+      <a href="/listings/new" class="wl-host-link">Become a Host</a>
+      <div class="wl-user-menu">
+        <button class="wl-user-btn" onclick="toggleUserMenu()">
+          <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-circle-user"></i>
+        </button>
+        <div class="wl-dropdown" id="wlDropdown">
+          <% if (!currUser) { %>
+            <a href="/signup">Sign Up</a>
+            <a href="/login">Log In</a>
+          <% } else { %>
+            <span class="wl-dropdown-user">👋 <%= currUser.username %></span>
+            <a href="/listings/new">Add Listing</a>
+            <a href="/listings">My Listings</a>
+            <hr/>
+            <a href="/logout">Log Out</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function toggleUserMenu() {
+    document.getElementById('wlDropdown').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.wl-user-menu')) {
+      document.getElementById('wlDropdown').classList.remove('open');
+    }
+  });
+</script>

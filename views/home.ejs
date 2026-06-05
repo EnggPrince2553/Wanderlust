@@ -1,0 +1,111 @@
+<!-- Home Page: Airbnb-inspired -->
+<% layout("/layouts/boilerplate") %>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Find your next adventure</h1>
+    <p>Discover unique stays, hidden gems and unforgettable places to stay around the world</p>
+    <form class="hero-search" action="/listings" method="GET">
+      <div class="hero-search-inner">
+        <div class="hs-field">
+          <label>Where</label>
+          <input name="location" type="text" placeholder="Search destinations" />
+        </div>
+        <div class="hs-divider"></div>
+        <div class="hs-field">
+          <label>Property type</label>
+          <input name="type" type="text" placeholder="Any type" />
+        </div>
+        <button type="submit" class="hs-btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Search</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Category Filter -->
+<section class="category-bar">
+  <div class="category-scroll">
+    <% const categories = [
+      { icon: 'fa-mountain-sun', label: 'Mountains' },
+      { icon: 'fa-umbrella-beach', label: 'Beach' },
+      { icon: 'fa-city', label: 'City' },
+      { icon: 'fa-tree', label: 'Cabins' },
+      { icon: 'fa-water', label: 'Lakefront' },
+      { icon: 'fa-igloo', label: 'Arctic' },
+      { icon: 'fa-campground', label: 'Camping' },
+      { icon: 'fa-building-columns', label: 'Historic' },
+      { icon: 'fa-sailboat', label: 'Boats' },
+      { icon: 'fa-star', label: 'Top Rated' },
+    ]; %>
+    <% for (let cat of categories) { %>
+    <a href="/listings" class="category-item">
+      <i class="fa-solid <%= cat.icon %>"></i>
+      <span><%= cat.label %></span>
+    </a>
+    <% } %>
+  </div>
+</section>
+
+<!-- Listings Grid -->
+<section class="home-listings">
+  <div class="section-header">
+    <h2>Popular places to stay</h2>
+    <a href="/listings" class="view-all-btn">View all →</a>
+  </div>
+
+  <div class="home-grid">
+    <% for (let listing of allListings.slice(0, 8)) { %>
+    <a href="/listings/<%= listing._id %>" class="home-card">
+      <div class="hc-img-wrap">
+        <img src="<%= listing.image.url %>" alt="<%= listing.title %>" />
+        <button class="hc-heart" onclick="event.preventDefault()">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+      </div>
+      <div class="hc-body">
+        <div class="hc-top">
+          <span class="hc-title"><%= listing.title %></span>
+          <span class="hc-price">&#8377;<%= listing.price.toLocaleString("en-IN") %><small>/night</small></span>
+        </div>
+        <p class="hc-loc"><i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %></p>
+      </div>
+    </a>
+    <% } %>
+  </div>
+</section>
+
+<!-- Why Wanderlust Section -->
+<section class="why-section">
+  <h2>Why choose Wanderlust?</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <h3>Safe & Secure</h3>
+      <p>Every booking is protected with our secure payment system and verified listings.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon"><i class="fa-solid fa-globe"></i></div>
+      <h3>Worldwide Stays</h3>
+      <p>Explore millions of unique homes, apartments and villas across the globe.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon"><i class="fa-solid fa-headset"></i></div>
+      <h3>24/7 Support</h3>
+      <p>Our team is always here to help, before, during and after your trip.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Ready to be a host?</h2>
+    <p>Share your space and earn extra income with thousands of travelers worldwide.</p>
+    <a href="/listings/new" class="cta-btn">Start Hosting</a>
+  </div>
+</section>
