@@ -3,7 +3,7 @@ const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderLust";
+const MONGO_URL = "mongodb+srv://prince24080_db_user:prince2553%3F@cluster0.bvqdr7p.mongodb.net/wanderLust?retryWrites=true&w=majority&appName=Cluster0";
 
 main()
   .then(() => {
