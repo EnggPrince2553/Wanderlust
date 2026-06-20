@@ -27,6 +27,12 @@ module.exports.showListing =  async(req, res) => {
 }
 
 module.exports.createListing = async (req, res, next) => {
+  if (req.body.listing && typeof req.body.listing.image === "string") {
+    req.body.listing.image = {
+      url: req.body.listing.image,
+      filename: "listingimage",
+    };
+  }
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   await newListing.save();
@@ -46,6 +52,12 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
+  if (req.body.listing && typeof req.body.listing.image === "string") {
+    req.body.listing.image = {
+      url: req.body.listing.image,
+      filename: "listingimage",
+    };
+  }
   await Listing.findByIdAndUpdate(id, { ...req.body.listing });
   req.flash("success", "Listing Updated!");
   res.redirect(`/listings/${id}`);

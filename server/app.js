@@ -149,6 +149,12 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 app.post("/listings", validateListing, wrapAsync(async (req, res) => {
+  if (req.body.listing && typeof req.body.listing.image === "string") {
+    req.body.listing.image = {
+      url: req.body.listing.image,
+      filename: "listingimage",
+    };
+  }
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   req.flash("success", "New Listing Created!");
@@ -167,6 +173,12 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 
 app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
   let { id } = req.params;
+  if (req.body.listing && typeof req.body.listing.image === "string") {
+    req.body.listing.image = {
+      url: req.body.listing.image,
+      filename: "listingimage",
+    };
+  }
   await Listing.findByIdAndUpdate(id, { ...req.body.listing });
   req.flash("success", "Listing Updated!");
   res.redirect(`/listings/${id}`);
