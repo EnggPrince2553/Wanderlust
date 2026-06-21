@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // Import the main Express app
-const app = require("../server/app.js");
+const app = require("./server/app.js");
 
 // Export the Express app handler for Vercel
 module.exports = app;
