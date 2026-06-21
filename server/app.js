@@ -26,7 +26,7 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const { register } = require("module");
 
-const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderLust";
+const dbUrl = process.env.ATLASDB_URL || "mongodb+srv://prince24080_db_user:prince2553@cluster0.bvqdr7p.mongodb.net/wanderLust?appName=Cluster0";
 
 main()
   .then(() => {
